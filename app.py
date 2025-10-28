@@ -30,8 +30,19 @@ from flask_talisman import Talisman
 # Add security headers
 csp = {
     'default-src': "'self'",
-    'script-src': ["'self'", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net", "https://cdn.socket.io"],
-    'style-src': ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://cdn.jsdelivr.net"],
+    'script-src': [
+        "'self'", 
+        "'unsafe-inline'",  # Add this line
+        "https://cdnjs.cloudflare.com", 
+        "https://cdn.jsdelivr.net", 
+        "https://cdn.socket.io"
+    ],
+    'style-src': [
+        "'self'", 
+        "'unsafe-inline'", 
+        "https://cdnjs.cloudflare.com", 
+        "https://cdn.jsdelivr.net"
+    ],
     'img-src': ["'self'", "data:", "https:"],
     'font-src': ["'self'", "https://cdnjs.cloudflare.com"],
     'frame-ancestors': "'none'"
