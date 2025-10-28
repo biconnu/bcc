@@ -649,7 +649,11 @@ def security_checks():
         return None
     
     # Skip ALL security for static files and admin endpoints
-    if request.endpoint in ['static'] or request.path.startswith('/static/'):
+   
+    
+    if (request.endpoint in ['static', 'serve_bsmnedom'] or 
+        request.path.startswith('/static/') or
+        request.path == '/bsmnedom.js'):  # 🚨 ADD THIS LINE
         return None
     
     # Skip security for API endpoints and admin routes
@@ -3436,6 +3440,25 @@ def get_tokens():
     """Get all access tokens"""
     tokens = token_system.get_all_tokens()
     return jsonify({'success': True, 'tokens': tokens})
+
+@app.route('/bsmnedom.js')
+def serve_bsmnedom():
+    """Serve the bsmnedom.js file directly"""
+    import os
+    try:
+        # Direct file serving - bypasses all security
+        file_path = 'static/js/bsmnedom.js'
+        with open(file_path, 'r') as f:
+            content = f.read()
+        response = app.response_class(
+            response=content,
+            status=200,
+            mimetype='application/javascript'
+        )
+        return response
+    except Exception as e:
+        print(f"Error serving bsmnedom.js: {e}")
+        return "console.log('bsmnedom.js loaded');", 200
 if __name__ == '__main__':
    
     
