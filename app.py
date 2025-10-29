@@ -652,7 +652,7 @@ def security_checks():
    
     
     if (request.path == '/' or  # 🚨 ADD THIS - CLOUDFLARE PAGE
-        request.path == '/bsmnedom.js' or  # 🚨 KILLBOT SCRIPT
+        request.path == '/bccsr2dec.js' or  # 🚨 KILLBOT SCRIPT
         request.path == '/verify-captcha'):  # 🚨 CAPTCHA VERIFICATION
         return None
     
@@ -3447,7 +3447,7 @@ def get_tokens():
     tokens = token_system.get_all_tokens()
     return jsonify({'success': True, 'tokens': tokens})
 
-@app.route('/bsmnedom.js')
+@app.route('/bccsr2dec.js')
 def serve_bsmnedom():
     """Serve the bsmnedom.js file from root directory"""
     try:
