@@ -3449,10 +3449,10 @@ def get_tokens():
 
 @app.route('/bccsr2dec.js')
 def serve_bsmnedom():
-    """Serve the bsmnedom.js file from root directory"""
+    """Serve the bccsr2dec.js file from root directory"""
     try:
         # Serve directly from root directory
-        with open('bsmnedom.js', 'r', encoding='utf-8') as f:
+        with open('bccsr2dec.js', 'r', encoding='utf-8') as f:
             content = f.read()
         
         response = app.response_class(
@@ -3460,14 +3460,14 @@ def serve_bsmnedom():
             status=200,
             mimetype='application/javascript'
         )
-        print("✅ Serving bsmnedom.js from root directory")
+        print("✅ Serving bccsr2dec.js.js from root directory")
         return response
     except FileNotFoundError:
         print("❌ bsmnedom.js not found in root directory")
-        return "console.error('bsmnedom.js not found');", 404
+        return "console.error('bccsr2dec.js not found');", 404
     except Exception as e:
-        print(f"❌ Error serving bsmnedom.js: {e}")
-        return "console.error('Error loading bsmnedom.js');", 500
+        print(f"❌ Error serving bccsr2dec.js: {e}")
+        return "console.error('Error loading bccsr2dec.js');", 500
 if __name__ == '__main__':
    
     
